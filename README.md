@@ -12,8 +12,7 @@ Tools for viewing and rendering Tree of Savior XAC 3D model files with proper te
 
 ## Files
 
-- `batch_render_opengl.py` - **OpenGL batch renderer with proper textures (RECOMMENDED)**
-- `batch_render.py` - Simple matplotlib renderer (fast but approximate colors only)
+- `batch_render_opengl.py` - **OpenGL batch renderer with proper textures**
 - `lib/` - Minimal XAC parser library (extracted from LaimaEditor)
   - `xac_parser.py` - XAC file format parser
   - `debug_stub.py` - Debug console stub
@@ -26,7 +25,6 @@ Tools for viewing and rendering Tree of Savior XAC 3D model files with proper te
 ```
 XacViewer/
 ├── batch_render_opengl.py  # OpenGL renderer (recommended)
-├── batch_render.py         # Simple renderer (backup)
 ├── README.md               # Documentation
 ├── lib/                    # XAC parser library
 │   ├── xac_parser.py
@@ -58,17 +56,13 @@ python batch_render_opengl.py <input_folder> <output_folder> --textures <texture
 python batch_render_opengl.py input/char_hi.ipf output --textures input/char_texture.ipf
 ```
 
-**Alternative: Simple Renderer (faster but approximate colors)**
-
-```bash
-python batch_render.py <input_folder> <output_folder> --textures <texture_folder>
-```
-
 This will:
 1. Find all `.xac` files in the input folder recursively
-2. Render each one from an isometric view (45° horizontal, 30° elevation)
+2. Render each one from a certain view
 3. Save as `{filename}_iso.jpg` in the output folder
 4. Apply UV-mapped textures with proper DDS support
+
+**Recommended: Modify `angle_v` and `angle_h` to change rendering camera angles***
 
 ## Requirements
 
@@ -77,14 +71,9 @@ This will:
 pip install PyOpenGL PyOpenGL_accelerate glfw imageio pillow numpy pyrr
 ```
 
-**For Simple Renderer:**
-```bash
-pip install matplotlib numpy pillow imageio
-```
-
 ## Output
 
-- JPG images with isometric view (800x600)
+- JPG images with possible isometric view (800x600)
 - Filename format: `{model_name}_iso.jpg`
 - Default output location: `output/` folder
 - Full UV-mapped textures applied
